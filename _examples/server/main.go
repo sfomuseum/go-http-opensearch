@@ -104,37 +104,21 @@ func main() {
 
 	searchform_url := filepath.Join(endpoint, path_search)
 
-	im := &opensearch.OpenSearchImage{
-		Height: opensearch.DEFAULT_IMAGE_HEIGHT,
-		Width:  opensearch.DEFAULT_IMAGE_WIDTH,
-		URI:    "http://localhost:8080/opensearch.jpg",
+	desc_opts := &opensearch.BasicDescriptionOptions{
+		Name:     "Example Search",
+		Description:   "Example Search is an example",		
+		QueryParameter: "term",
+		ImageURI:    "http://localhost:8080/opensearch.jpg",
+		SearchTemplate: fmt.Sprintf("http://%s", searchform_url),
+		SearchForm: fmt.Sprintf("http://%s", searchform_url),
 	}
 
-	params := []*opensearch.OpenSearchURLParameter{
-		&opensearch.OpenSearchURLParameter{
-			Name:  "term",
-			Value: opensearch.DEFAULT_SEARCHTERMS,
-		},
-	}
+	desc, err := opensearch.BasicDescription(desc_opts)
 
-	u := &opensearch.OpenSearchURL{
-		Type:       opensearch.DEFAULT_URL_TYPE,
-		Method:     opensearch.DEFAULT_URL_METHOD,
-		Template:   fmt.Sprintf("http://%s", searchform_url),
-		Parameters: params,
+	if err != nil {
+		log.Fatal(err)
 	}
-
-	desc := &opensearch.OpenSearchDescription{
-		NSMoz:         opensearch.NS_MOZ,
-		NSOpenSearch:  opensearch.NS_OPENSEARCH,
-		InputEncoding: "UTF-8",
-		ShortName:     "Example Search",
-		Description:   "Example Search is an example",
-		Image:         im,
-		URL:           u,
-		SearchForm:    fmt.Sprintf("http://%s", searchform_url),
-	}
-
+	
 	index_handler, err := IndexHandler()
 
 	if err != nil {
