@@ -14,9 +14,9 @@ const NS_MOZ string = "http://www.mozilla.org/2006/browser/search/"
 const NS_OPENSEARCH string = "http://a9.com/-/spec/opensearch/1.1/"
 
 type OpenSearchImage struct {
-	Height int `xml:"height,attr"`
-	Width  int `xml:"width,attr"`
-	URI    string
+	Height int    `xml:"height,attr"`
+	Width  int    `xml:"width,attr"`
+	URI    string `xml:",chardata"`
 }
 
 type OpenSearchURL struct {
@@ -32,14 +32,15 @@ type OpenSearchURLParameter struct {
 }
 
 type OpenSearchDescription struct {
-	XMLName      xml.Name         `xml:"OpenSearchDescription"`
-	NSMoz        string           `xml:"xmlns:moz,attr"`
-	NSOpenSearch string           `xml:"xmlns,attr"`
-	ShortName    string           `xml:"ShortName"`
-	Description  string           `xml:"Description"`
-	Image        *OpenSearchImage `xml:"Image"`
-	URL          *OpenSearchURL   `xml:"Url"`
-	SearchForm   string           `xml:"moz:searchForm"`
+	XMLName       xml.Name         `xml:"OpenSearchDescription"`
+	NSMoz         string           `xml:"xmlns:moz,attr"`
+	InputEncoding string           `xml:"InputEncoding"`
+	NSOpenSearch  string           `xml:"xmlns,attr"`
+	ShortName     string           `xml:"ShortName"`
+	Description   string           `xml:"Description"`
+	Image         *OpenSearchImage `xml:"Image"`
+	URL           *OpenSearchURL   `xml:"Url"`
+	SearchForm    string           `xml:"moz:searchForm"`
 }
 
 func (d *OpenSearchDescription) Marshal() ([]byte, error) {

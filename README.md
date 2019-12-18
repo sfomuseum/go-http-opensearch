@@ -1,6 +1,11 @@
 # go-http-opensearch
 
-Work in progress. This is not ready to use yet.
+Go package to implement an OpenSearch HTTP middleware handler.
+
+## Important
+
+* Documentation to follow. In the meantime have a look at [_examples/server](_examples/server/main.go).
+* As of this writing only a limited subset of `OpenSearch` is implemented, specifically just enough to work with [Firefox](https://developer.mozilla.org/en-US/docs/Web/OpenSearch).
 
 ## See also
 
