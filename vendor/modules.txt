@@ -1,0 +1,5 @@
+# github.com/aaronland/go-http-rewrite v0.0.4
+github.com/aaronland/go-http-rewrite
+# golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553
+golang.org/x/net/html
+golang.org/x/net/html/atom

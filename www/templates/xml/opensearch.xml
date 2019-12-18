@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<InputEncoding>UTF-8</InputEncoding>
+	<ShortName>{{ .ShortName }}</ShortName>
+	<Description>{{ .Description }}</Description>
+	<Image height="16" width="16" type="image/x-icon">data:image/x-icon;base64,{{ .ImageBase64 }}</Image>
+	<Url type="text/html" method="get" template="{{ .URL }}">
+	  <Param name="{{ .QueryParameter }}" value="{searchTerms}"/>
+	</Url>
+	<moz:SearchForm>{{ .URL }}</moz:SearchForm>
+</OpenSearchDescription>
