@@ -27,7 +27,7 @@ var search_html = `<!DOCTYPE html>
     <meta charset="utf-8">
     <title>go-http-opensearch</title>
   </head>
-  <body>This is the index page. Query term is <q>{{ .Term }}</q>.</body>
+  <body>This is the search page. Query term is <q>{{ .Term }}</q>.</body>
 </html>
 `
 
