@@ -11,11 +11,11 @@ import (
 	"net/http"
 )
 
-type AppendResourcesOptions struct {
-	Descriptions []*opensearch.OpenSearchDescription
+type AppendPluginsOptions struct {
+	Plugins map[string]*opensearch.OpenSearchDescription
 }
 
-func AppendResourcesHandler(next http.Handler, opts *AppendResourcesOptions) http.Handler {
+func AppendPluginsHandler(next http.Handler, opts *AppendPluginsOptions) http.Handler {
 
 	var cb rewrite.RewriteHTMLFunc
 
@@ -23,11 +23,11 @@ func AppendResourcesHandler(next http.Handler, opts *AppendResourcesOptions) htt
 
 		if n.Type == html.ElementNode && n.Data == "head" {
 
-			for _, d := range opts.Descriptions {
+			for uri, d := range opts.Plugins {
 
 				link_rel := html.Attribute{"", "rel", "search"}
 				link_type := html.Attribute{"", "type", "application/opensearchdescription+xml"}
-				link_href := html.Attribute{"", "href", "FIXME"}
+				link_href := html.Attribute{"", "href", uri}
 				link_title := html.Attribute{"", "title", d.ShortName}
 
 				link := html.Node{

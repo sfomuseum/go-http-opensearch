@@ -1,7 +1,6 @@
 package http
 
 import (
-	"encoding/xml"
 	"github.com/sfomuseum/go-http-opensearch"
 	gohttp "net/http"
 )
@@ -14,7 +13,7 @@ func OpenSearchHandler(opts *OpenSearchHandlerOptions) (gohttp.Handler, error) {
 
 	fn := func(rsp gohttp.ResponseWriter, req *gohttp.Request) {
 
-		body, err := xml.Marshal(opts.Description)
+		body, err := opts.Description.Marshal()
 
 		if err != nil {
 			gohttp.Error(rsp, err.Error(), gohttp.StatusInternalServerError)

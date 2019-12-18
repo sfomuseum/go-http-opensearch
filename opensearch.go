@@ -52,6 +52,6 @@ func (d *OpenSearchDescription) Marshal() ([]byte, error) {
 
 	body := []byte(xml.Header)
 	body = append(body, enc...)
-	
+
 	return body, nil
 }
