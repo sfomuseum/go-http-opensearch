@@ -1,43 +1,28 @@
 package http
 
 import (
-	"errors"
+	"encoding/xml"
 	"github.com/sfomuseum/go-http-opensearch"
 	gohttp "net/http"
-	"text/template"
 )
 
 type OpenSearchHandlerOptions struct {
-	Description *opensearch.OpenSearchDescription
-	Templates   *template.Template
-}
-
-type OpenSearchVars struct {
 	Description *opensearch.OpenSearchDescription
 }
 
 func OpenSearchHandler(opts *OpenSearchHandlerOptions) (gohttp.Handler, error) {
 
-	t := opts.Templates.Lookup("opensearch")
-
-	if t == nil {
-		return nil, errors.New("Missing 'opensearch' template")
-	}
-
 	fn := func(rsp gohttp.ResponseWriter, req *gohttp.Request) {
 
-		vars := OpenSearchVars{
-			Description: opts.Description,
-		}
-
-		rsp.Header().Set("Content-Type", "application/opensearchdescription+xml")
-
-		err := t.Execute(rsp, vars)
+		body, err := xml.Marshal(opts.Description)
 
 		if err != nil {
 			gohttp.Error(rsp, err.Error(), gohttp.StatusInternalServerError)
 			return
 		}
+
+		rsp.Header().Set("Content-Type", "application/opensearchdescription+xml")
+		rsp.Write(body)
 	}
 
 	h := gohttp.HandlerFunc(fn)
