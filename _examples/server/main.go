@@ -108,7 +108,7 @@ func main() {
 		Name:     "Example Search",
 		Description:   "Example Search is an example",		
 		QueryParameter: "term",
-		ImageURI:    "http://localhost:8080/opensearch.jpg",
+		ImageURI:    opensearch.DEFAULT_IMAGE_URI,
 		SearchTemplate: fmt.Sprintf("http://%s", searchform_url),
 		SearchForm: fmt.Sprintf("http://%s", searchform_url),
 	}
